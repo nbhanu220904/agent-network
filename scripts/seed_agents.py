@@ -1,7 +1,10 @@
 import json
 import httpx
+import os
 
-API = 'http://localhost:8000/api/v1'
+# API = 'http://localhost:8000/api/v1'
+API = os.getenv('API_URL', 'http://localhost:8000') + '/api/v1'
+
 AGENTS = {
     'swiggy': ('Swiggy', 'Food Delivery', 'Interested in payment partnerships, bank card offers, festive promotions and restaurant discounts.'),
     'phonepe': ('PhonePe', 'Payments & Fintech', 'Interested in e-commerce promotions, food delivery festive discounts, UPI payment partnerships and merchant cashback.'),

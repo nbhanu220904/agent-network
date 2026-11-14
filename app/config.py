@@ -14,5 +14,6 @@ class Settings(BaseSettings):
     max_notify: int = 5
     final_threshold: float = 0.75
     vector_only_threshold: float = 0.60
+    registration_token: str = ''
 
 settings = Settings()

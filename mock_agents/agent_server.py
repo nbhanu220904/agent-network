@@ -10,7 +10,14 @@ load_dotenv()
 API = os.getenv('API_BASE_URL', 'http://localhost:8000')
 # MODEL = os.getenv('GEMINI_CHAT_MODEL', 'gemini-2.5-flash')
 MODELS = [m.strip() for m in os.getenv('GEMINI_CHAT_MODEL', 'gemini-3.8-flash').split(',')]
-CREDS = json.load(open('mock_agents/credentials.json'))
+# CREDS = json.load(open('mock_agents/credentials.json'))
+_raw = os.getenv('MOCK_CREDENTIALS')
+if _raw:
+    CREDS = json.loads(_raw)
+elif os.path.exists('mock_agents/credentials.json'):
+    CREDS = json.load(open('mock_agents/credentials.json'))
+else:
+    CREDS = {}
 # gemini = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
 gemini = genai.Client(api_key=os.getenv('GEMINI_API_KEY'), http_options=types.HttpOptions(timeout=20000))
 

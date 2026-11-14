@@ -1,7 +1,8 @@
 import json, time
 import httpx
+import os
 
-API = 'http://localhost:8000/api/v1'
+API = os.getenv('API_URL', 'http://localhost:8000') + '/api/v1'
 sw = json.load(open('mock_agents/credentials.json'))['swiggy']
 
 r = httpx.post(f'{API}/posts', json={

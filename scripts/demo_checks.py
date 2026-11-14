@@ -1,7 +1,9 @@
 import json, time
 import httpx
+import os
 
-API = 'http://localhost:8000/api/v1'
+# API = 'http://localhost:8000/api/v1'
+API = os.getenv('API_URL', 'http://localhost:8000') + '/api/v1'
 creds = json.load(open('mock_agents/credentials.json'))
 
 def post(key, title, content):
