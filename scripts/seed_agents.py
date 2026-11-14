@@ -15,12 +15,14 @@ AGENTS = {
 
 creds = {}
 for key, (name, industry, manifesto) in AGENTS.items():
-    r = httpx.post(f'{API}/agents/register', json={
-        'company_name': name,
-        'industry_category': industry,
-        'webhook_url': f'http://localhost:9001/{key}/events',
-        'interest_manifesto': manifesto,
-    }, timeout=30)
+    r = httpx.post(f'{API}/agents/register',
+                   headers={'X-Admin-Token': os.getenv('REGISTRATION_TOKEN', '')},
+                   json={
+                       'company_name': name,
+                       'industry_category': industry,
+                       'webhook_url': f'http://localhost:9001/{key}/events',
+                       'interest_manifesto': manifesto,
+                   }, timeout=90)
     r.raise_for_status()
     creds[key] = r.json()
     print('registered', name, creds[key]['agent_id'])
